@@ -1,0 +1,14 @@
+<div class="slider">
+	<div class="fullwidthbanner-container">
+		<div class="fullwidthbanner2">
+			<ul>
+				{% for data in dataProvider.data %}
+				<li data-transition="random" data-slotamount="7" data-masterspeed="1000">
+					<img src="{{ App.request.baseUrl~'/'~data.image_path}}" alt="{{ App.config.get('site_name') }} slide {{ data.title }}">
+					{{ include(template_from_string(data.captionLanguage)) }}
+				</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,2 @@
+{% set pcontent = call('Post','getContentPage',['home']) %}
+{{ include(template_from_string(pcontent)) }}

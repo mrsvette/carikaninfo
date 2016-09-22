@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="language" content="id" />	
+	<meta name="description" content="{{ this.meta_description }}" /> 
+	<meta name="keywords" content="{{ this.meta_keywords }}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="MobileOptimized" content="320">
+	<!-- Favicon and touch icons -->
+	<link rel="shortcut icon" type="image/x-icon" href="{{ App.request.baseUrl~'/uploads/images/'~App.config.get('favicon') }}">
+	<link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ App.request.baseUrl~'/uploads/images/apple-touch-icon-144-precomposed.png' }}">
+	<link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ App.request.baseUrl~'/uploads/images/apple-touch-icon-114-precomposed.png' }}">
+	<link rel="apple-touch-icon-precomposed" sizes="72x72" href="{{ App.request.baseUrl~'/uploads/images/apple-touch-icon-72-precomposed.png' }}">
+	<link rel="apple-touch-icon-precomposed" href="{{ App.request.baseUrl~'/uploads/images/apple-touch-icon-57-precomposed.png' }}">
+
+	<title>{% block title %}{{ C.Html.encode(this.pageTitle) }}{% endblock %}</title>
+	<link rel="canonical" href="{{ App.request.requestUri }}" />
+</head>
+<body>
+	{{ this.get_css(
+		{'path':'css/'~App.theme.name~'/css/bootstrap.min.css'},
+			{'patern':'../fonts','replacement':App.request.baseUrl~'/css/'~App.theme.name~'/fonts'}
+		) |raw 
+	}}
+	{{ this.get_css(
+		{'path':'css/'~App.theme.name~'/css/animate.min.css'}) |raw 
+	}}
+	{{ this.get_css(
+		{'path':'css/'~App.theme.name~'/css/responsive.css'}) |raw 
+	}}
+	{{ this.get_css(
+		{'path':'css/'~App.theme.name~'/css/custom.css'},
+			{'patern':'../images','replacement':App.request.baseUrl~'/css/'~App.theme.name~'/images'}
+		) |raw 
+	}}
+	{{ this.get_css(
+		{'path':'css/'~App.theme.name~'/css/prettyPhoto.css'},
+			{'patern':'../images','replacement':App.request.baseUrl~'/css/'~App.theme.name~'/images'}
+		) |raw 
+	}}
+	{{ this.get_css(
+		{'path':'css/'~App.theme.name~'/css/style.css'},
+			{'patern':'../images','replacement':App.request.baseUrl~'/css/'~App.theme.name~'/images'}
+		) |raw 
+	}}
+	{{ this.get_css(
+		{'path':'css/'~App.theme.name~'/css/select.css'}) |raw 
+	}}
+	{{ this.get_js({'path':'css/'~App.theme.name~'/js/jquery-2.1.4.min.js'}) |raw }}
+    <!-- START SITE -->
+    <div id="wrapper">
+	<nav id="top">
+		<div class="container">
+			<div class="pull-left">
+				small banner
+			</div>
+			<div id="top-links" class="nav pull-right">
+			<!-- user menu -->
+			{% do this.widget('zii.widgets.CMenu', {
+				'items':{
+					0:{
+						'label':'<i class="fa fa-user"></i> My Account <span class="caret"></span>', 
+						'url':'#',
+						'linkOptions':{'data-toggle':'dropdown', 'role':'button', 'aria-haspopup':'true', 'aria-expanded':'false'},
+						'items':{
+							0:{'label':'Profile', 'itemOptions':{'class':'dropdown-header'}, 'visible':not App.user.isGuest},
+							1:{'label':'Register', 'url':['customer/cRegister'], 'visible':App.user.isGuest},
+							2:{'label':'Login', 'url':['customer/default/login'], 'visible':App.user.isGuest},
+							3:{'label':'Edit Profile', 'url':['/home'], 'visible':not App.user.isGuest},
+							4:{'label':'Logout', 'url':['customer/default/logout'], 'visible':not App.user.isGuest},
+							5:{'label':'<hr/>', 'visible':not App.user.isGuest},
+							6:{'label':'Dashboard', 'url':['/customer'], 'visible':not App.user.isGuest},
+							7:{'label':'My Orders', 'url':['/customer/cOrder'], 'visible':not App.user.isGuest},
+							8:{'label':'Messages', 'url':['/customer/cMessages'], 'visible':not App.user.isGuest},
+						},
+						'itemOptions':{'class':'dropdown membermenu hovermenu'}
+					},
+					1:{'label':'<i class="fa fa-plus"></i> Pasang Iklan', 'url':['customer/cRegister']},
+				},
+				'htmlOptions':{'class':'nav navbar-nav navbar-right'},
+				'submenuHtmlOptions':{'class':'dropdown-menu'},
+				'encodeLabel':false,
+			}) %}
+			</div>
+		</div>
+	</nav>
+        <header class="header">
+            <div class="container-menu">
+                <nav class="navbar navbar-default yamm">
+                    <div class="container">
+                        <div class="navbar-table row">
+                            <div class="navbar-cell col-md-3 col-sm-3">
+                                <div class="navbar-header">
+                                    <a href="{{ App.createUrl('/') }}">
+										<img src="{{ App.request.baseurl~'/uploads/images/'~App.config.get('logo') }}">
+									</a>
+                                    <div class="open-menu">
+                                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+                                            <span class="sr-only">Toggle navigation</span>
+                                            <span class="fa fa-bars"></span>
+                                        </button>
+                                    </div>
+                                </div><!-- end navbar-header -->
+                            </div><!-- end navbar-cell -->
+                            <div class="navbar-cell stretch col-md-9 col-sm-9">
+                                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-2">
+                                    <div class="navbar-cell row">
+						<div class="col-sm-12 col-xs-12">
+							<form class="dropForm text-right">
+                                <div class="input-prepend">
+                                    <div class="btn-group">
+                                        <select name="orderby" class="selectpicker">
+                                          <option>Semua kategori</option>
+                                          <option>IOS Apps</option>
+                                          <option>Android Apps</option>
+                                          <option>UI Kits</option>
+                                          <option>Site Templates</option>
+                                          <option>WordPress Themes</option>
+                                      </select>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Search anything here.">
+                                    <button class="btn btn-primary" tabindex="-1"><i class="fa fa-search"></i></button>
+                                </div>
+							</form>
+						</div>
+                                    </div><!-- end navbar-cell -->
+                                </div><!-- /.navbar-collapse -->        
+                            </div><!-- end navbar cell -->
+                        </div><!-- end navbar-table -->
+                    </div><!-- end container fluid -->
+                </nav><!-- end navbar -->
+            </div><!-- end container -->
+        </header>
+		<section class="section single-wrap">
+			{% block breadcrumbs %}{% endblock %}
+			{% block content %}
+				{{content | raw}}
+			{% endblock %}
+		</section>
+        <footer class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-6 col-lg-5">
+                        <div class="media cen-xs">
+                            <p>
+                                &copy; {{ App.config.get('site_name') }} 2016 - All Rights Reserverd.<br>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-7">
+                        <ul class="list-inline text-right cen-xs">
+                            <li><a href="#">Bantuan</a></li>
+                            <li><a class="topbutton" href="#">Back to top <i class="fa fa-angle-up"></i></a></li>
+                        </ul>
+                    </div>
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </footer><!-- end footer -->
+    </div><!-- end wrapper -->
+    <!-- END SITE -->
+<link href="{{ App.request.baseUrl~'/css/'~App.theme.name~'/css/font-awesome.min.css' }}" rel="stylesheet">
+
+<script src="{{ App.request.baseUrl~'/css/'~App.theme.name~'/js/bootstrap-3.3.6.min.js' }}"></script>
+<script src="{{ App.request.baseUrl~'/css/'~App.theme.name~'/js/custom.js' }}"></script>
+{# do this.widget('application.modules.analitik.components.AnalitikWidget') #}
+</body>
+</html>

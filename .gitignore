@@ -5,6 +5,7 @@ protected/runtime/*
 protected/data/*.db
 protected/config/main.php
 protected/vendor/yiisoft/yii/*
+protected/vendor/yiiext/twig-renderer/*
 *.zip
 *.sql
 *.sql.gz

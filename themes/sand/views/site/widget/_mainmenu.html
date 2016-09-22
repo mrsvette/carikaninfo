@@ -1,0 +1,19 @@
+{%
+	do this.widget('zii.widgets.CMenu', {
+		'id':'menu-main-menu',
+		'items':items,
+		'htmlOptions':{'id':'nav','class':'nav navbar-nav navbar-center'},
+		'submenuHtmlOptions':{'class':'dropdown-menu'},
+		'activeCssClass':'current',
+		'encodeLabel':false,
+	})
+%}
+
+
+{{ void(App.clientScript.registerScript('customize', "
+	var menu = $('#nav').find('ul.dropdown-menu').parent().find('a:first');
+	menu.addClass('dropdown-toggle');
+	menu.attr('data-toggle','dropdown');
+	menu.append(' <b class=\"fa fa-angle-down\"></b>');
+	 $('#nav').find('ul.dropdown-menu').parent().addClass('dropdown megamenu yamm-half hovermenu');
+")) }}

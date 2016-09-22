@@ -1,0 +1,82 @@
+{{ this.beginContent('/layouts/layout_default') }}
+{% block content %}
+<section class="section single-wrap">
+	<div class="container">
+		<div class="page-title">
+			<div class="row">
+				<div class="col-sx-12 text-center">
+					<h3>{{ this.pageSection }}</h3>
+					<div class="bread">
+						{% do this.widget('zii.widgets.CBreadcrumbs', {
+							'links':this.breadcrumbs,
+							'tagName':'ol',
+							'htmlOptions':{'class':'breadcrumb'},
+							'separator':'',
+							'activeLinkTemplate':'<li><a href="{url}">{label}</a></li>',
+							'inactiveLinkTemplate':'<li><a href="#">{label}</a></li>',
+						}) %}
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="content-top">
+			<div class="row">
+				<div class="col-sx-6 col-sm-6">
+					<div class="custommenu hidden-xs hide">
+					<div class="custommenu hidden-xs">
+						<a id="showLeft" href="#" title="" class="bt-menu-trigger"><i class="fa fa-bars"></i></a>
+					</div>
+				</div> 
+				<div class="col-sm-6 col-xs-12 cen-xs text-right">
+					<ul class="list-inline social">
+						<li><a href="#"><i class="fa fa-facebook"></i></a></li>
+						<li><a href="#"><i class="fa fa-twitter"></i></a></li>
+						<li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+						<li><a href="#"><i class="fa fa-dribbble"></i></a></li>
+						<li><a href="#"><i class="fa fa-behance"></i></a></li>
+						<li><a href="#"><i class="fa fa-pinterest"></i></a></li>
+					</ul>
+				</div>
+			</div><!-- end row -->
+		</div><!-- end content top -->
+		<div class="content-before">
+			<div class="row">
+			<div class="nav">
+			<!-- user menu -->
+			{% do this.widget('zii.widgets.CMenu', {
+				'items':{
+					0:{
+						'label':'<i class="fa fa-dollar"></i> Transaction List <span class="caret"></span>', 
+						'url':'#',
+						'linkOptions':{'data-toggle':'dropdown', 'role':'button', 'aria-haspopup':'true', 'aria-expanded':'false'},
+						'items':{
+							0:{'label':'On Process Transaction', 'url':['customer/cInvoice/unpaid'], 'visible':not App.user.isGuest},
+							1:{'label':'Shipping Process', 'url':['customer/cInvoice/paid'], 'visible':not App.user.isGuest},
+							2:{'label':'Delivered Transaction', 'url':['customer/cInvoice/refund'], 'visible':not App.user.isGuest},
+							3:{'label':'Finished Transaction', 'url':['customer/cInvoice'], 'visible':not App.user.isGuest},
+							4:{'label':'Canceled Transaction', 'url':['customer/cInvoice'], 'visible':not App.user.isGuest},
+						},
+						'itemOptions':{'class':'dropdown membermenu hovermenu'}
+					},
+					1:{'label':'<i class="fa fa-money"></i> Payment Confirmation', 'url':['customer/cRegister']},
+					2:{'label':'<i class="fa fa-weibo"></i> Order Status', 'url':['customer/default/login']},
+				},
+				'htmlOptions':{'class':'nav navbar-nav'},
+				'submenuHtmlOptions':{'class':'dropdown-menu'},
+				'encodeLabel':false,
+			}) %}
+			</div>
+			</div>
+		</div>
+		<div class="content">
+			{% include(template_from_string(content)) %}
+		</div>
+		<div class="content-after text-center boxs">
+			<div class="row">
+				<div class="col-md-12"></div>
+			</div>
+		</div>
+	</div>
+</section>
+{% endblock %}
+{{ this.endContent() }}
