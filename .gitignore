@@ -4,6 +4,7 @@ protected/runtime/*
 !protected/runtime/.gitignore
 protected/data/*.db
 protected/config/main.php
+protected/vendor/yiisoft/yii/*
 *.zip
 *.sql
 *.sql.gz
