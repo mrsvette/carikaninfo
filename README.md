@@ -1,3 +1,3 @@
-# Jagung Bakar 1.1.2
+# Pencarian Informasi
 
 Yii version of 1.1.17
