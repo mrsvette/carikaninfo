@@ -1,0 +1,19 @@
+<div class="col-xs-6 col-sm-6 col-md-4 image">
+	<div class="thmb-prev">
+	<a data-rel="prettyPhoto" href="javascript:void(0);" href-rel="{{ App.request.baseUrl ~'/'~ data.image_one_rel.src~''~ data.image_one_rel.image |raw }}" rel="prettyPhoto">
+		{% if data.image_one_rel.thumb %}
+		<img class="img-responsive" alt="" src="{{ App.request.baseUrl ~'/'~ data.image_one_rel.thumb~''~$data.image_one_rel.image |raw }}">
+		{% else %}
+		<img class="img-responsive" alt="" src="{{ App.request.baseUrl ~'/'~ data.image_one_rel.src~''~data.image_one_rel.image |raw }}">
+		{% endif %}
+	</a>
+	</div>
+	<h5 class="fm-title">
+		{{ C.Html.link(data.name,['#']) }}
+	</h5>
+	<ul>
+	{% for facility in data.facility_rel %}
+		<li>{{ facility.name }}</li>
+	{% endfor %
+	</ul>
+</div>

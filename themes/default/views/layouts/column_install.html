@@ -1,0 +1,5 @@
+{{ this.beginContent('/layouts/layout_install') }}
+{% block content %}
+	{{ include(template_from_string(content)) }}
+{% endblock %}
+{{ this.endContent() }}

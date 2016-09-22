@@ -1,0 +1,105 @@
+{% do this.setPageTitle('Installation - '~App.name) %}
+
+<div class="container">
+	<div class="row">
+		{% set form=this.beginWidget('CActiveForm') %}
+		<div class="col-sm-12">
+			<h4><b>Application Configuration</b></h4><hr/>
+			{{ form.errorSummary(model,null,null,{'class':'alert alert-warning alert-block alert-dismissable fade in'}) |raw }}
+			<div class="col-sm-6">
+				<div class="form-group">
+					{{ form.labelEx(model,'application_name',{'class':'control-label'}) |raw }}
+					{{ form.textField(model,'application_name',{'class':'form-control'}) |raw }}
+					{{ form.error(model,'application_name') |raw }}
+				</div>
+
+				<div class="form-group">
+					{{ form.labelEx(model,'language',{'class':'control-label'}) |raw }}
+					{{ form.dropDownList(model,'language',model.languageList(),{'class':'form-control'}) |raw }}
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<p>Set the Website Name</p>
+				<p>Default language" determines the default locale settings (for dates, currencies, etc.), as well as the default language of the CMS interface. This can be changed for each user. </p>
+				<p>Warning: The CMS interface may be missing translations in certain locales. </p>
+			</div>
+			<div class="clearfix space10"></div>
+		</div>
+		<div class="col-sm-12">
+			<h4><b>Database Configuration</b></h4><hr/>
+		</div>
+		<div class="col-sm-12">
+			<div class="col-sm-6">
+				<div class="form-group">
+					{{ form.labelEx(model,'database_server',{'class':'control-label'}) |raw }}
+					{{ form.textField(model,'database_server',{'class':'form-control'}) |raw }}
+					{{ form.error(model,'database_server') |raw }}
+				</div>
+
+				<div class="form-group">
+					{{ form.labelEx(model,'database_username',{'class':'control-label'}) |raw }}
+					{{ form.textField(model,'database_username',{'class':'form-control'}) |raw }}
+					{{ form.error(model,'database_username') |raw }}
+				</div>
+
+				<div class="form-group">
+					{{ form.labelEx(model,'database_password',{'class':'control-label'}) |raw }}
+					{{ form.passwordField(model,'database_password',{'class':'form-control'}) |raw }}
+				</div>
+
+				<div class="form-group">
+					{{ form.labelEx(model,'database_name',{'class':'control-label'}) |raw }}
+					{{ form.textField(model,'database_name',{'class':'form-control'}) |raw }}
+					{{ form.error(model,'database_name') |raw }}
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<p><?php echo Yii::app().name;?> stores its content in a relational SQL database. 
+				Please provide the username and password to connect to the server here. 
+				If this account has permission to create databases, then we will create the database for you; 
+				otherwise, you must give the name of a database that already exists.</p>
+				<p>Other databases:</p>
+				<p>Databases in the list that are greyed out cannot currently be used. Click on them for more information and possible remedies.</p>
+			</div>
+			<div class="clearfix space10"></div>
+		</div>
+		<div class="col-sm-12">
+			<h4><b>CMS Admin Account</b></h4><hr/>
+			<div class="col-sm-6">
+				<div class="form-group">
+					{{ form.labelEx(model,'admin_username',{'class':'control-label'}) |raw }}
+					{{ form.textField(model,'admin_username',{'class':'form-control'}) |raw }}
+					{{ form.error(model,'admin_username') |raw }}
+				</div>
+
+				<div class="form-group">
+					{{ form.labelEx(model,'admin_password',{'class':'control-label'}) |raw }}
+					{{ form.passwordField(model,'admin_password',{'class':'form-control'}) |raw }}
+					{{ form.error(model,'admin_password') |raw }}
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<p>We will set up the first administrator account for you automatically. You can change these details later in the "Security" section within the CMS.</p>
+			</div>
+			<div class="clearfix space10"></div>
+		</div>
+		<div class="col-sm-12">
+			<h4><b>Theme selection</b></h4><hr/>
+			<div class="col-sm-6">
+				<div class="form-group">
+					{{ form.radioButtonList(model,'theme',model.themesList(),{'template':'{input} {label}'}) |raw }}
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<p>You can change the theme or download another from the SilverStripe website after installation. </p>
+			</div>
+			<div class="clearfix space10"></div>
+		</div>
+		<div class="col-sm-12">
+			{{ C.Html.submitButton(call('Yii','t',['install','Confirm Install']),{'style':'min-width:100px;','class':'btn btn-default'}) |raw }}
+			<div class="clearfix space10"></div>
+		</div>
+
+		{% do this.endWidget() %}
+	</div>
+</div>

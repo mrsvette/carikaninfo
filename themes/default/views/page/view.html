@@ -1,0 +1,23 @@
+{# set this.breadcrumbs={'0':model.content_rel.title} #}
+
+{{ void(this.renderPartial('_view', {'data':model})) }}
+
+<div id="comments">
+	{% if model.commentCount>=1 %}
+		<h3>
+			{% if model.commentCount>1 %} {{ model.commentCount ~ ' comments' }} {% else %} {{ 'One comment' }} {% endif %}
+		</h3>
+		{{ void(this.renderPartial('_comments',{'post':model,'comments':model.comments})) }}
+	{% endif %}
+	{% if model.allow_comment>0 %}
+		<h3>Leave a Comment</h3>
+
+		{% if App.user.hasFlash('commentSubmitted') %}
+			<div class="flash-success">
+				{{ App.user.getFlash('commentSubmitted') }}
+			</div>
+		{% else %}
+			{{ void(this.renderPartial('_comment_form',{'model':comment})) }}
+		{% endif %}
+	{% endif %}
+</div><!-- comments -->

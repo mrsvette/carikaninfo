@@ -1,0 +1,32 @@
+{
+    "id":           "gallery",
+    "name":         "Gallery Module",
+    "description":  "Gallery module for jagung bakar 1.1.2",
+    "icon":     	"icon.png",
+    "author":       "farid efendi",
+    "author_url":   "http://jagungbakar.web.id/",
+    "license":      "GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+    "version":      "1.0.0",
+	"config"		: {
+			0:{
+				"title":"Upload Folder Path",
+				"name":"gallery_upload_path",
+				"value":"uploads/images/gallery",
+				"type":"string",
+			},
+			1:{
+				"title":"Max Upload File Size (bytes)",
+				"name":"gallery_max_file_size",
+				"value":5000,
+				"type":"number",
+				"placeholder":"Max upload file size in bytes",
+			},
+			2:{
+				"title":"Allowed File Type",
+				"name":"gallery_allowed_file_type",
+				"value":"jpg, jpeg, png",
+				"type":"string",
+				"placeholder":"Allowed file type",
+			},
+		}
+}

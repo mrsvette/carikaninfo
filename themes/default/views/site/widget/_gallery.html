@@ -1,0 +1,9 @@
+<div class="row no-gutter">
+	{% for data in dataProvider.data %}
+		<div class="{{htmloptions.class}}">
+			<a href="{{ App.request.baseUrl~'/'~data.thumb~''~data.image}}" class="prettyphoto" rel="prettyPhoto[pp_gal]" title="Blog post title">
+				<img class="img-responsive" src="{{ App.request.baseUrl~'/'~data.thumb~''~data.image}}" alt="">
+			</a>
+		</div>
+	{% endfor %}
+</div>

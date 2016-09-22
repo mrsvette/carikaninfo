@@ -1,0 +1,14 @@
+{%
+	do this.widget('zii.widgets.CMenu', {
+		'id':'menu-main-menu',
+		'items':items,
+		'htmlOptions':{'id':'nav'},
+		'submenuHtmlOptions':{'class':'sub-menu'},
+		'activeCssClass':'current',
+		'encodeLabel':false,
+	})
+%}
+{{ void(App.clientScript.registerScript('customize', "
+	var menu=$('ul.sub-menu').parent().find('a:first');
+	menu.append('<i class=\"fa fa-arrow-circle-o-right\"></i>');
+")) }}

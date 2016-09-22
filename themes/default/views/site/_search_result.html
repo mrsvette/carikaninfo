@@ -1,0 +1,5 @@
+<div class="col-md-12">
+	<b>{{ C.Html.link(data.findReplace(App.user.getState('Search_key'),data.content_rel.title),data.url) | raw}}</b>
+	{% set parse_content = data.findReplace(App.user.getState('Search_key'),data.parseContent2(20,false)) %}
+	<p style="padding-left:20px;">{{ parse_content | raw }}</p>
+</div>

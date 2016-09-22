@@ -1,0 +1,29 @@
+<div class="single-blog">
+	<!--<div class="blog-img">
+		<a href="#"><img src="img/blog/blog_1.jpg" alt="Blog" /></a>
+	</div>-->
+	<div class="blog-text-area">
+		<div class="date">
+			<span>{{ data.create_time | date("d") }}</span>
+			<span class="month">{{ data.create_time | date("F Y") }}</span>
+		</div>
+		<div class="block-desc">
+			{{ C.Html.link('<h3>'~ C.Html.encode(data.content_rel.title)~'</h3>', data.url, {'class':'post-title'}) |raw }}
+			{% if this.actionParams.id %}
+				{{ include(template_from_string(data.content_rel.content)) }}
+			{% else %}
+				{{ include(template_from_string(data.parseContent())) }}
+			{% endif %}
+			{% if data.allow_comment>0 %}
+			<div class="comment-area">
+				<a href="#">
+					<span class="author"><i class="fa fa-user"></i>{{ data.author_rel.username }}</span>
+				</a>
+				<a href="#">
+					<span class="comment"><i class="fa fa-comments"></i>{{ data.commentCount }} {{ call('Yii','t',['post','Comments']) }}</span>
+				</a>
+			</div>
+			{% endif %}
+		</div>
+	</div>
+</div>

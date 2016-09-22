@@ -1,0 +1,20 @@
+<div class="pad5A box-md">
+	<div class="input-group">
+		<input type="text" class="form-control" destination="#content-frame" placeholder="Search terms here ..." onchange="cari(this);" action="{{ App.createUrl('site/search') }}">
+		<span class="input-group-btn">
+			<a class="btn btn-primary btn-search" href="javascript:void(0);">Search</a>
+		</span>
+	</div>
+</div>
+
+<script type="text/javascript">
+/* search site */
+function cari(data){
+	$.ajax({
+		'beforeSend': function() { Loading.show(); },'complete': function() { Loading.hide(); },
+      	'url': $(data).attr('action'),'type':'post','dataType': 'json','data':{"question":$(data).val()},
+      	'success': function(dt){if(dt.status=='success'){$($(data).attr('destination')).html(dt.div);}},
+    });
+	return false;
+}
+</script>

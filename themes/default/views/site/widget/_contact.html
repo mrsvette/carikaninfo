@@ -1,0 +1,58 @@
+	{% set form=this.beginWidget('CActiveForm', {
+			'id':'contact-form',
+			'enableAjaxValidation':false,
+			'htmlOptions':{'class':'form-horizontal','role':'form'},
+	}) %}
+	{{ form.errorSummary(model,null,null,{'class':'alert alert-warning alert-block alert-dismissable fade in'}) |raw }}
+
+	{% if App.user.hasFlash('contact') %}
+	<div class="alert alert-success">
+		<button class="close" aria-hidden="true" data-dismiss="alert" type="button">×</button>
+		{{ App.user.getFlash('contact') }}
+	</div>
+	{% endif %}
+	<div class="col-sm-6">
+		<div class="clearfix padding10">
+		<div class="form-group">
+			{{ form.textField(model,'name',{'class':'form-control','placeholder':'Name'})|raw }}
+			{{ form.error(model,'name')|raw }}
+		</div>
+		<div class="form-group">
+			{{ form.textField(model,'email',{'class':'form-control','placeholder':'Email'})|raw }}
+			{{ form.error(model,'email')|raw }}
+		</div>
+		<div class="form-group">
+			{{ form.textField(model,'phone',{'class':'form-control','placeholder':'Telepon'})|raw }}
+			{{ form.error(model,'phone')|raw }}
+		</div>
+		<div class="form-group">
+			{{ form.textField(model,'company',{'class':'form-control','placeholder':'Company'})|raw }}
+			{{ form.error(model,'company')|raw }}
+		</div>
+		<div class="form-group">
+			{{ form.textField(model,'country',{'class':'form-control','placeholder':'Country'})|raw }}
+			{{ form.error(model,'country')|raw }}
+		</div>
+		{{ form.hiddenField(model,'subject',{'value':'Kontak User'})|raw }}
+		</div>
+	</div>
+	<div class="col-sm-6">
+		<div class="clearfix padding10">
+			<div class="form-group">
+				{{ form.textArea(model,'body',{'class':'form-control','placeholder':'Message','rows':4})|raw }}
+				{{ form.error(model,'body')|raw }}
+			</div>
+			<div class="form-group row">
+				<div class="col-sm-5">
+				{% do this.widget('CCaptcha',{'clickableImage':true,'showRefreshButton':false}) %}
+				</div>
+				<div class="col-sm-7 no-padding">
+					{{ form.textField(model,'verifyCode',{'class':'form-control','placeholder':'Verification code'})|raw }}
+				</div>
+			</div>
+			<div class="form-group">
+				{{ C.Html.submitButton(call('Yii','t',['global','Submit']),{'class':'btn btn-green-square btn-block','style':'min-width:100px;'})|raw }}
+			</div>
+		</div>
+	</div>
+	{% do this.endWidget() %}

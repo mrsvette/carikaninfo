@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="language" content="en" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+        
+	<!-- xxx Favicons xxx -->
+	<link rel="shortcut icon" href="{{ App.request.baseUrl~'/css/'~App.theme.name~'/images/favicon.ico'}}">
+	
+	<link rel="stylesheet" href="{{ App.request.baseUrl~'/css/default/css/bootstrap.css'}}">
+	<link rel="stylesheet" href="{{ App.request.baseUrl~'/css/default/css/style.css'}}">
+	<link rel="stylesheet" href="{{ App.request.baseUrl~'/css/default/css/responsive.css'}}">
+	<link rel="stylesheet" href="{{ App.request.baseUrl~'/css/default/css/font-awesome.min.css'}}">
+	
+	<script src="{{ App.request.baseUrl~'/css/default/js/jquery.js'}}"></script>
+	<title>{% block title %}{{ C.Html.encode(this.pageTitle) }}{% endblock %}</title>
+</head>
+
+<body>
+<div class="body">
+	<div class="main-wrap container">
+		<div class="row">
+			<div class="col-md-9 ts-main-left">
+				<!-- HEADER -->
+				<header>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-6 logo">
+								<h3>{{ C.Html.link(C.Html.image(App.request.baseUrl~'/uploads/images/'~App.config.get('logo'),'',{'class':'img-responsive'}),{'0':'/home'},{'class':'logo'}) |raw }}</h3>
+							</div>
+							<div class="col-md-12">				
+								<h2>CMS / Framework Installation Version {{ App.params.version }}</h2>
+								<p>Thanks for choosing to use Jagung Bakar! Please follow the instructions below and you should be up in running in no time.</p>
+							</div>
+						</div>
+					</div>
+				</header>
+
+				{% block content %}
+					{{content | raw}}
+				{% endblock %}
+
+				<!-- FOOTER-COPYRIGHT -->
+				<div class="container footer" data-animated="0">
+					<div class="row">
+						<div class="col-md-12">
+							<footer>
+								<div class="col-md-6">
+									<p>&copy; {{ now | date("Y") }} {{ App.name }} All Rights Reserved</p>
+								</div>
+								<div class="col-md-6">
+									<ul class="f-social">
+										<li><a href="#" class="fa fa-google-plus"></a></li>
+										<li><a href="#" class="fa fa-twitter"></a></li>
+										<li><a href="#" class="fa fa-dribbble"></a></li>
+										<li><a href="#" class="fa fa-facebook"></a></li>
+									</ul>
+								</div>
+							</footer>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3 ts-main-right">
+				<div class="row">
+					<div class="col-md-12" data-animated="0">
+						<p>{{ C.Html.link(C.Html.image(App.request.baseUrl~'/uploads/images/yii-powered.png'),['/home']) | raw }}</p>
+					</div>
+					<div class="clearfix"></div>
+				</div>
+			</div>	
+		</div>
+	</div>
+</div>
+<script src="{{ App.request.baseUrl~'/css/default/js/bootstrap.min.js'}}"></script>
+<script src="{{ App.request.baseUrl~'/css/default/scrolltotop/arrow79.js'}}"></script>
+
+<noscript><a class="backtotop" href="#"></a></noscript>
+</body>
+</html>

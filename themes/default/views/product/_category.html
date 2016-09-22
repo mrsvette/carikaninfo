@@ -1,0 +1,34 @@
+<div class="side-bar">
+	<h2><i class="fa fa-align-justify"></i>Category</h2>
+	<nav>
+		<ul>
+		{% for model in dataProvider.data %}
+			<li>
+				{% set childs = model.getChildItems(0,true) %}
+				<a href="{{ model.permalink }}">
+					<span>{{ model.ion |raw }}</span>
+					{{ model.title }}
+					{% if childs %}
+					<span class="right-icon"><i class="fa fa-arrow-circle-o-right"></i></span>
+					{% endif %}
+				</a>
+				{% if childs %}
+				<div class="category-mega-menu">
+					<span class="menu-text">
+						{% for ic, child_id in childs %}
+							{% set child = call('ModProductCategory','getItem',[child_id]) %}
+							<a href="{{ child.getPermalink(0,model.id) }}">{{ child.ionTitle | raw }}</a>
+						{% endfor %}
+					</span>
+					{% if model.iconUrl %}
+					<span>
+						{{ C.Html.image(model.iconUrl) |raw }}
+					</span>
+					{% endif %}
+				</div>
+				{% endif %}
+			</li>
+		{% endfor %}
+		</ul>
+	</nav>
+</div>

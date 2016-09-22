@@ -1,0 +1,10 @@
+{% for comment in comments %}
+<div class="single_comment">
+	<img class="img-rounded lazy img-responsive" alt="" data-original="{{ App.request.baseUrl~'/uploads/images/avatar.jpg'}}" src="{{ App.request.baseUrl~'/uploads/images/avatar.jpg' }}" style="display: block;">
+	<div class="comment_blog">
+		<h3>{{ comment.authorLink | raw }} say: </h3>
+		<p>{{ C.Html.encode(comment.content) | nl2br }}</p>
+		<p class="date_time"><i class="fa fa-clock-o"></i>On {{ comment.create_time | date('M j, Y \a\t h:i a') }}</p>
+	</div>
+</div>
+{% endfor %}

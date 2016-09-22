@@ -1,0 +1,120 @@
+{% if this.actionParams.tag %}
+<h1>Posts Tagged with <i>{{ C.Html.encode(this.actionParams.tag) }}</i></h1>
+{% else %}
+<!--MENU-BOTTOM START-->
+<div class="menu-bottom">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-lg-12">
+				<div class="category-gird-menu">
+					<nav>
+						{%
+							set breadcrumbs = this.widget('zii.widgets.CMenu', {
+								'id':'breadcrumbs',
+								'items':{
+									'0':{
+										'label':'<i class="fa fa-home"></i> Home', 'url':{'0':'/home'},
+									},
+									'1':{
+										'label':'Blogs', 'url':{'0':'/home'},
+									},
+									'2':{
+										'label':category.category_name, 'url':{'0':'/'~category.key}, 'linkOptions':{'class':'active-current'}
+									},
+									},
+									'encodeLabel':false,
+								})
+						%}
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--MENU-BOTTOM END-->
+{% endif %}
+<!-- MAINCONTAIN-AREA START-->
+<div class="maincontain-area">
+	<div class="container">
+		<div class="row">
+			<div class="maincontain">
+				<div class="col-lg-3 col-md-3">
+					<div class="row">
+						<!-- BLOG CATEGORIES START-->
+						<div class="col-lg-12 col-md-12 col-sm-6">
+							<h2 class="category-heding">
+								{{ call('Yii','t',{'0':'post','1':'Categories'}) }}
+							</h2>
+							<div class="manufacturers-color-menu">
+								<nav>
+									<ul>
+									{% for category in categories %}
+								    <li>
+										{{ C.Html.link('<i class="fa fa-arrow-right"></i> '~category.category_name,{'0':'post/index','type':category.key}) |raw }}
+									</li>
+									{% endfor %}
+								</nav>
+							</div>
+						</div>
+						<!-- BLOG CATEGORIES END-->
+						<!-- RECENT POST START-->
+						<div class="col-lg-12 col-md-12 recent_post_all col-sm-6">
+							<h2 class="recent-post-heding">
+								{{ call('Yii','t',{'0':'post','1':'Latest Post'}) }}
+							</h2>
+							<div class="manufacturers-color-menu">
+								<nav>
+									<ul>
+									{% for idx, lpost in call('Post','getLatestPost') %}
+								    <li>
+										{{ C.Html.link('<i class="fa fa-arrow-right"></i> '~lpost.title,lpost.url) |raw }}
+									</li>
+									{% endfor %}
+								</nav>
+							</div>
+						</div>
+						<!-- RECENT POST END-->
+						<!-- POPULAR TAGS START-->
+						<div class="col-lg-12 col-md-12 col-sm-6">
+							<div class="popular-tags">
+								<h2 class="recent-post-heding">Popular tags</h2>
+								<div class="tags">
+									<ul>
+										<li><a href="#">agency</a></li>
+										<li><a href="#">blog</a></li>
+										<li><a href="#">business</a></li>
+										<li><a href="#">clean</a></li>
+										<li><a href="#">corporate</a></li>
+										<li><a href="#">creative</a></li>
+										<li><a href="#">ecommerce</a></li>
+										<li><a href="#">elegant</a></li>
+										<li><a href="#">fashion</a></li>
+										<li><a href="#">minimal</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- POPULAR TAGS END-->
+					</div>
+				</div><!-- col-lg-3 col-md-3 end -->
+				<div class="col-lg-9 col-md-9 col-sm-12">
+					<div class="row">
+						<!-- BLOAG_MAIN_AREA START-->
+						<div class="bloag_main_area">
+							<!-- SINGLE-BLOG START-->
+							{{ void(this.widget('zii.widgets.CListView', {
+								'dataProvider':dataProvider,
+								'itemView':'_view',
+								'template':"{items}\n{pager}",
+								'itemsCssClass':'col-lg-12 col-md-12',
+							})) }}
+							<!-- SINGLE-BLOG END-->
+						</div>
+						<!-- BLOAG_MAIN_AREA END-->
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- MAINCONTAIN-AREA END-->

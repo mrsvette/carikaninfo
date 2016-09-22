@@ -1,0 +1,17 @@
+{% do this.setPageTitle(App.name~ " - Error") %}
+{% do this.setBreadcrumbs(['Error']) %}
+
+<div class="hero-box hero-box-smaller full-bg-13 font-inverse" data-top-bottom="background-position: 50% 0px;" data-bottom-top="background-position: 50% -600px;">
+	<div class="container">
+		<h1 class="hero-heading wow fadeInDown" data-wow-duration="0.6s">Error {{ code }}</h1>
+	</div>
+	<div class="hero-overlay bg-black">
+	</div>
+</div>
+<div class="small-padding pad25B">
+	<div class="container row">
+		<div class="col-md-12" id="content-frame">
+            <div class="alert alert-warning">{{ C.Html.encode(message) |raw }}</div>
+		</div>
+	</div>
+</div>

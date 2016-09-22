@@ -1,0 +1,16 @@
+<div class="form wide">
+	{% set form = this.beginWidget('CActiveForm') %}
+	<div class="row">
+		{{ form.labelEx(model,'search_for') |raw }}
+		{{ form.textField(model,'search_for') |raw }}
+		{{ C.Html.submitButton('Search') | raw }}
+	</div>
+	{% do this.endWidget() %}
+</div>
+{% if dataProvider %}
+{% do this.widget('zii.widgets.CListView', {
+	'dataProvider':dataProvider,
+	'itemView':'_search',
+	'template':"{items}\n{pager}",
+}) %}
+{% endif %}

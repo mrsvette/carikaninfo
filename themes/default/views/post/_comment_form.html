@@ -1,0 +1,26 @@
+{% set form=this.beginWidget('CActiveForm', {
+	'id':'comment-form',
+	'enableAjaxValidation':true,
+	'htmlOptions':{'class':'col-lg-8 col-md-8 col-sm-12','id':'comments_form'},
+}) %}
+	{{ form.errorSummary(model,null,null,{'class':'alert alert-warning alert-block alert-dismissable fade in'}) |raw }}
+
+	<p>
+		{{ form.labelEx(model,'author') |raw }}
+		{{ form.textField(model,'author',{'size':30,'maxlength':128,'placeholder':'Name','class':'form-control'}) |raw }}
+	</p>
+	<p>
+		{{ form.labelEx(model,'email') |raw }}
+		{{ form.textField(model,'email',{'size':30,'maxlength':128,'placeholder':'Email','class':'form-control'}) |raw }}
+	</p>
+	<p>
+		{{ form.labelEx(model,'url') |raw }}
+		{{ form.textField(model,'url',{'size':30,'maxlength':128,'placeholder':'Website','class':'form-control'}) |raw }}
+	</p>
+	<p>
+		{{ form.textArea(model,'content',{'rows':3, 'cols':40,'placeholder':'Message','class':'form-control'}) |raw }}
+	</p>
+	<div class="button_for_text">
+		{{ C.Html.submitButton(call('Yii','t',['global','Save']),{'class':'btn btn-info'}) |raw }}
+	</div>
+{{ void(this.endWidget()) }}

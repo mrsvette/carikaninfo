@@ -1,0 +1,38 @@
+{% do this.setPageTitle(App.name~ " - Installation") %}
+
+<div class="container">
+	<div class="row">
+		<div class="col-sm-12">
+			<h4><b>Completed Installation</b></h4><hr/>
+			<div class="col-sm-12">
+				<div class="alert alert-success">
+					<p>Congratulation !, your new website is successfully installed.<br/>
+					Please remove "install.php" on this path {{ App.request.baseUrl~'/install.php' }}</p>
+					<p>You can manage your new website on {{ C.Html.link(App.createUrl('appadmin'),['/appadmin']) |raw }}</p>
+					<p>Please use this default account to login in admin area:</p>
+					<p>Username : admin<br/>
+					Password : admin</p>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				{{ C.Html.link('Go To Website',['/home'],{'class':'btn btn-info'}) | raw }}
+				{{ C.Html.link('Go To Admin Area',['/appadmin'],{'class':'btn btn-success','target':'_newtab'}) | raw }}
+			</div>
+			<div class="clearfix space20"></div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+function setup(){
+	$.ajax({
+		'url': "{{ App.createUrl('/site/finishedInstalation') }}",
+		'dataType': 'json',
+		'type':'post',
+		'success': function(data) {}
+	});
+	return false;
+}
+$(function(){
+	setup();
+});
+</script>

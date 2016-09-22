@@ -1,0 +1,32 @@
+{
+    "id":           "testimonial",
+    "name":         "Testimonial Module",
+    "description":  "Testimonial module for jagung bakar 1.1.2",
+    "icon":     	"icon.png",
+    "author":       "farid efendi",
+    "author_url":   "http://jagungbakar.web.id/",
+    "license":      "GPL version 2 or later - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html",
+    "version":      "1.0.0",
+	"config"		: {
+			0:{
+				"title":"Upload Folder Path",
+				"name":"testimonial_upload_path",
+				"value":"uploads/images/testimonial",
+				"type":"string",
+			},
+			1:{
+				"title":"Max Upload File Size (bytes)",
+				"name":"testimonial_max_file_size",
+				"value":3000000,
+				"type":"number",
+				"placeholder":"Max upload file size in bytes",
+			},
+			2:{
+				"title":"Allowed File Type",
+				"name":"testimonial_allowed_file_type",
+				"value":"jpg, jpeg, png",
+				"type":"string",
+				"placeholder":"Allowed file type",
+			},
+		}
+}

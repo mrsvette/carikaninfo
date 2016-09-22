@@ -1,0 +1,11 @@
+<div class="post">
+	<div class="title">
+		{{ C.Html.link(C.Html.encode(data.title), data.url) }}
+	</div>
+	<div class="author">
+		posted by {{ data.author.username ~ ' on ' ~ (data.create_time |date('F j, Y'))) }}
+	</div>
+	<div class="content">
+		{{ data.parseContent() }}
+	</div>
+</div>

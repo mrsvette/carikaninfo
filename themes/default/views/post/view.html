@@ -1,0 +1,180 @@
+<!--MENU-BOTTOM START-->
+<div class="menu-bottom">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 col-lg-12">
+				<div class="category-gird-menu">
+					<nav>
+						{%
+							set breadcrumbs = this.widget('zii.widgets.CMenu', {
+								'id':'breadcrumbs',
+								'items':{
+									'0':{
+										'label':'<i class="fa fa-home"></i> Home', 'url':{'0':'/home'},
+									},
+									'1':{
+										'label':'Blogs', 'url':{'0':'/home'},
+									},
+									'2':{
+										'label':model.content_rel.title, 'url':model.url, 'linkOptions':{'class':'active-current'}
+									},
+									},
+									'encodeLabel':false,
+								})
+						%}
+					</nav>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!--MENU-BOTTOM END-->
+<!-- MAINCONTAIN-AREA START-->
+<div class="maincontain-area">
+	<div class="container">
+		<div class="row">
+			<div class="maincontain">
+				<div class="col-lg-3 col-md-3">
+					<div class="row">
+						<!-- BLOG CATEGORIES START-->
+						<div class="col-lg-12 col-md-12 col-sm-6">
+							<h2 class="category-heding">
+								{{ call('Yii','t',{'0':'post','1':'Categories'}) }}
+							</h2>
+							<div class="manufacturers-color-menu">
+								<nav>
+									<ul>
+									{% for category in categories %}
+								    <li>
+										{{ C.Html.link('<i class="fa fa-arrow-right"></i> '~category.category_name,{'0':'post/index','type':category.key}) |raw }}
+									</li>
+									{% endfor %}
+								</nav>
+							</div>
+						</div>
+						<!-- BLOG CATEGORIES END-->
+						<!-- RECENT POST START-->
+						<div class="col-lg-12 col-md-12 recent_post_all col-sm-6">
+							<h2 class="recent-post-heding">
+								{{ call('Yii','t',{'0':'post','1':'Latest Post'}) }}
+							</h2>
+							<div class="manufacturers-color-menu">
+								<nav>
+									<ul>
+									{% for idx, lpost in call('Post','getLatestPost') %}
+								    <li>
+										{{ C.Html.link('<i class="fa fa-arrow-right"></i> '~lpost.title,lpost.url) |raw }}
+									</li>
+									{% endfor %}
+								</nav>
+							</div>
+						</div>
+						<!-- RECENT POST END-->
+						<!-- POPULAR TAGS START-->
+						<div class="col-lg-12 col-md-12 col-sm-6">
+							<div class="popular-tags">
+								<h2 class="recent-post-heding">Popular tags</h2>
+								<div class="tags">
+									<ul>
+										<li><a href="#">agency</a></li>
+										<li><a href="#">blog</a></li>
+										<li><a href="#">business</a></li>
+										<li><a href="#">clean</a></li>
+										<li><a href="#">corporate</a></li>
+										<li><a href="#">creative</a></li>
+										<li><a href="#">ecommerce</a></li>
+										<li><a href="#">elegant</a></li>
+										<li><a href="#">fashion</a></li>
+										<li><a href="#">minimal</a></li>
+									</ul>
+								</div>
+							</div>
+						</div>
+						<!-- POPULAR TAGS END-->
+					</div>
+				</div><!-- col-lg-3 col-md-3 end -->
+				<div class="col-lg-9 col-md-9 col-sm-12">
+					<div class="row">
+						<!-- BLOG_MAIN_AREA START-->
+						<div class="bloag_main_area">
+							{# this.renderPartial('_view', {
+									'data':model,
+									'class':'blog-box-single',
+							}) #}
+							<!-- BLOG-DETAILS START-->
+							<div class="col-lg-12 col-md-12">
+							<!-- SINGLE-BLOG START-->
+							<div class="single-blog">
+								<!--<div class="blog-img">
+									<a href="#"><img src="img/blog/blog_1.jpg" alt="Blog" /></a>
+								</div>-->
+								<div class="blog-text-area">
+									<div class="date">
+										<span>{{ mode.create_time | date("d") }}</span>
+										<span class="month">{{ model.create_time | date("F Y") }}</span>
+									</div>
+									<div class="block-desc">
+										{{ C.Html.link('<h3>'~ C.Html.encode(model.content_rel.title)~'</h3>', data.url, {'class':'post-title'}) |raw }}
+										{{ model.content_rel.content | truncate(100) |raw }}
+										{% if model.allow_comment>0 %}
+										<div class="comment-area">
+											<a href="#">
+												<span class="author"><i class="fa fa-user"></i>{{ model.author_rel.username }}</span>
+											</a>
+											<a href="#">
+												<span class="comment"><i class="fa fa-comments"></i>{{ model.commentCount }} {{ call('Yii','t',['post','Comments']) }}</span>
+											</a>
+										</div>
+										{% endif %}
+									</div>
+								</div>
+								<div class="description_details">
+									{% if this.actionParams.id %}
+										{{ include(template_from_string(model.content_rel.content)) }}
+									{% else %}
+										{{ include(template_from_string(model.parseContent())) }}
+									{% endif %}
+								</div>
+							</div>
+							<!-- SINGLE-BLOG END-->
+							</div>
+							<!-- BLOG-DETAILS END-->
+						</div>
+						<!-- BLOAG_MAIN_AREA END-->
+						{% if model.commentCount>=1 %}
+						<!-- USER COMMENT_AREA START-->
+						<div class="col-lg-12 col-md-12">
+							<h2 class="heading_comments">{% if model.commentCount>1 %} {{ model.commentCount ~ ' ' ~ call('Yii','t',['post','comments']) }} {% else %} {{ call('Yii','t',['post','One comment']) }} {% endif %}</h2>
+							<div class="comment_area">
+							{{ this.renderPartial('_comments',{
+								'post':model,
+								'comments':model.comments,
+							}) }}
+							</div>
+						</div>
+						{% endif %}  
+						<!-- USER COMMENT_AREA END--> 
+						{% if model.allow_comment %}
+							<!-- USER COMMENT_FORM START-->
+							<div class="col-lg-12 col-md-12 user_comment_area">
+								<h2 class="heading_comments">{{ call('Yii','t',['post','Leave a comment']) }}</h2>
+								<div class="comment_form">
+								{% if App.user.hasFlash('commentSubmitted') %}
+									<div class="alert alert-success">
+										{{ App.user.getFlash('commentSubmitted') }}
+									</div>
+								{% endif %}
+								{{ this.renderPartial('_comment_form',{
+									'model':comment,
+								}) }}
+								</div>
+							</div>
+							<!-- USER COMMENT_FORM END-->
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<!-- MAINCONTAIN-AREA END-->
